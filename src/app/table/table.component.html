@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="card" *ngIf="issuccess">
+      <div class="card-header">Featured</div>
+  
+      <div class="form-group row serachform">
+        <label for="inputPassword" class="col-sm-12 col-form-label"
+          >Filter by
+        </label>
+        <div class="col-md-2 col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="listFilter"
+            placeholder="Filter"
+          />
+        </div>
+        <button
+          class="btn btn-primary float-right"
+          routerLink="/form-deatails"
+          (click)="addDeatails()"
+        >
+          Add Details
+        </button>
+      </div>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">No</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Gmail</th>
+            <th class="text-center">Area</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let stuDea of filteredTable; let i = index"
+            [attr.id]="stuDea.StudentId"
+          >
+            <td>{{ stuDea.StudentId }}</td>
+            <td>{{ stuDea.Name }}</td>
+            <td>{{ stuDea.Gmail }}</td>
+            <td>{{ stuDea.Area }}</td>
+            <td class="text-center">
+              <div class="btn-group" role="group">
+                <a class="btn btn-primary" (click)="userEdit(stuDea, i)"
+                  ><i class="far fa-edit"></i
+                ></a>
+                <a class="btn btn-danger" (click)="remove(stuDea.StudentId)"
+                  ><i class="fa fa-times" aria-hidden="true"></i
+                ></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <form class="detailsform" [formGroup]="registartionForm" *ngIf="success">
+      <div class="boxmodel">
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="StudentId">StudentId</label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="StudentId"
+              disabled
+              formControlName="StudentId"
+              class="form-control"
+              id="StudentId"
+              aria-describedby="StudentId"
+              placeholder="Enter StudentId"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="Name">Name</label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="Name"
+              value="Name"
+              formControlName="Name"
+              class="form-control"
+              id="Name"
+              aria-describedby="Name"
+              placeholder="Enter Name"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="Gmail">Email address</label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="Gmail"
+              value="Gmail"
+              formControlName="Gmail"
+              class="form-control"
+              id="Gmail"
+              aria-describedby="Gmail"
+              placeholder="Enter Gmail"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="Area">Area</label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="Area"
+              value="Area"
+              formControlName="Area"
+              class="form-control"
+              id="Area"
+              aria-describedby="Area"
+              placeholder="Enter Area"
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary btcommoon"
+          (click)="update(i)">
+          Update
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning bt-test btcommoon"
+          (click)="Cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
